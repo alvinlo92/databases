@@ -5,7 +5,7 @@ var mysql = require('mysql');
 // and to the database "chat".
 var connection = mysql.createConnection({
   host     : 'localhost',
-  database : 'food',
+  database : 'chat',
   user     : 'student',
   password : 'student'
 })
@@ -18,7 +18,7 @@ connection.connect(function(err) {
   console.log('Connected as id' + connection.threadId);
 });
 
-connection.query('SELECT name FROM foods', function (error, results, fields) {
+connection.query('SELECT message FROM messages', function (error, results, fields) {
   if (error)
     throw error;
 
