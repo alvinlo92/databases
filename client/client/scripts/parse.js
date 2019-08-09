@@ -1,6 +1,6 @@
 var Parse = {
 
-  server: `http://localhost:3000/`,
+  server: 'http://localhost:3000/',
 
   create: function(message, successCB, errorCB = null) {
 
@@ -14,7 +14,7 @@ var Parse = {
         console.error('chatterbox: Failed to create message', error);
       }
     });
-      },
+  },
 
   readAll: function(successCB, errorCB = null) {
     $.ajax({
