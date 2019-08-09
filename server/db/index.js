@@ -10,13 +10,7 @@ var connection = mysql.createConnection({
   password: 'student'
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('Error connecting: ' + err.stack);
-    return;
-  }
-  console.log('Connected as id' + connection.threadId);
-});
+connection.connect();
 
 // connection.query('SELECT message FROM messages', function (error, results, fields) {
 //   if (error) { throw error; }
@@ -26,7 +20,7 @@ connection.connect(function(err) {
 //   });
 // });
 
-connection.end();
+module.exports = connection;
 
 
 

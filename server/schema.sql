@@ -13,6 +13,7 @@ CREATE TABLE messages(
   message_id INT AUTO_INCREMENT PRIMARY KEY,
   message VARCHAR(255),
   chatroom VARCHAR(255),
+  username VARCHAR(255),
   user_id INT,
   FOREIGN KEY (user_id)
   REFERENCES users(user_id)

@@ -2,25 +2,44 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {}, // a function which produces all the messages
-    post: function (json) {
-      console.log(json)
-      db.query(`SELECT user_id FROM users WHERE username = ${json.username}`, function(err, results){
+    get: function (/*callback*/) {
+      db.query(`SELECT * FROM messages`, function(err, results) {
+        console.log('messages');
         if (err) {
-          throw err;
-        } else {
-          console.log(results);
-          db.query(`INSERT INTO messages (message, chatroom, user_id) VALUES (${json.message}, ${json.roomname}, ${json.username})`);
+          console.log(`messages: ${err}`)
         }
-      })
-    } // a function which can be used to insert a message into the database
+        // else {
+        //   callback(results)
+        // }
+      });
+    },
+    // a function which produces all the messages
+    post: function (json) {
+      db.query(`INSERT INTO messages (message, chatroom, username) VALUES (?,?,?)`, [json.message, json.roomname, json.username], function(err, results) {
+        if (err) {
+          console.log(`messages: ${err}`)
+        }
+      });
+    }
+    // a function which can be used to insert a message into the database
   },
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function (json) {
-      console.log(json);
+    get: function () {
+      db.query(`SELECT * FROM users`, function(err, results) {
+        console.log('users');
+        if (err) {
+          console.log(`users: ${err}`)
+        }
+      });
+    },
+    post: function (user) {
+      db.query(`INSERT INTO users (username) VALUES (?)`, [user.username], function (err, results) {
+        if (err) {
+          console.log(`users: ${err}`);
+        }
+      })
     }
   }
 };
